@@ -362,3 +362,21 @@ def session_audit(sid: str, db: DBSession = Depends(get_db)) -> dict[str, Any]:
             {"at": e.at.isoformat(), "action": e.action, "detail": e.detail} for e in entries
         ],
     }
+
+
+@router.get("/stats")
+def stats() -> dict[str, Any]:
+    """Aggregate counts across the knowledge-base and the database."""
+    from ..core.registry import load_form_templates
+    from ..db import SessionLocal
+
+    with SessionLocal() as db:
+        sessions = db.query(SessionRow).count()
+        tracking = db.query(TrackingRow).count()
+    return {
+        "schemes": len(load_schemes()),
+        "forms": len(load_form_templates()),
+        "languages": len(LANGS),
+        "sessions": sessions,
+        "tracking": tracking,
+    }
