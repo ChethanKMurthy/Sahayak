@@ -320,3 +320,27 @@ def search_schemes(q: str = "", lang: str = "en") -> dict[str, Any]:
                 {"id": s.id, "name": _txt(s.name), "category": s.category, "summary": _txt(s.summary)}
             )
     return {"query": q, "count": len(results), "results": results}
+
+
+@router.get("/health/deep")
+def health_deep() -> dict[str, Any]:
+    """Deep health: DB connectivity plus loaded knowledge-base counts."""
+    from sqlalchemy import text
+
+    from ..core.registry import load_form_templates
+    from ..db import SessionLocal
+
+    db_ok = True
+    try:
+        with SessionLocal() as db:
+            db.execute(text("SELECT 1"))
+    except Exception:
+        db_ok = False
+    return {
+        "ok": db_ok,
+        "db": db_ok,
+        "schemes": len(load_schemes()),
+        "forms": len(load_form_templates()),
+        "ocr": settings.ocr_provider,
+        "voice": settings.voice_provider,
+    }
