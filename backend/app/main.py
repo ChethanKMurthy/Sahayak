@@ -33,3 +33,9 @@ def _startup() -> None:
 @app.get("/")
 def root() -> dict[str, str]:
     return {"app": "Sahayak", "docs": "/docs", "health": "/api/health"}
+
+
+# ── Request-ID + timing middleware (improvement) ────────────────────────────
+from .core.request_log import RequestLogMiddleware  # noqa: E402
+
+app.add_middleware(RequestLogMiddleware)
