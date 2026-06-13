@@ -1,0 +1,10 @@
+# Code ownership for review routing. Order matters; last match wins.
+
+*               @ChethanKMurthy
+
+/backend/       @ChethanKMurthy
+/web/           @ChethanKMurthy
+/mobile/        @ChethanKMurthy
+/infra/         @ChethanKMurthy
+/shared/        @ChethanKMurthy
+/.github/       @ChethanKMurthy
