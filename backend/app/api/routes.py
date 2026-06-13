@@ -380,3 +380,19 @@ def stats() -> dict[str, Any]:
         "sessions": sessions,
         "tracking": tracking,
     }
+
+
+@router.get("/fair-price/{scheme_id}")
+def fair_price(scheme_id: str) -> dict[str, Any]:
+    """Official fee vs. the typical tout price for the form behind a scheme."""
+    template = form_or_scheme_form(scheme_id)
+    if template is None:
+        raise HTTPException(404, "No form for that scheme")
+    s = template.submit_to
+    return {
+        "scheme_id": scheme_id,
+        "official_fee": s.fee,
+        "tout_price": s.tout_price,
+        "you_save": max(s.tout_price - s.fee, 0),
+        "currency": "INR",
+    }
