@@ -12,7 +12,7 @@ import datetime as dt
 import json
 from typing import Any
 
-from sqlalchemy import JSON, DateTime, ForeignKey, String, Text, create_engine
+from sqlalchemy import JSON, DateTime, ForeignKey, LargeBinary, String, Text, create_engine
 from sqlalchemy.orm import (
     DeclarativeBase,
     Mapped,
@@ -24,8 +24,17 @@ from sqlalchemy.orm import (
 
 from .config import settings
 
-connect_args = {"check_same_thread": False} if settings.database_url.startswith("sqlite") else {}
-engine = create_engine(settings.database_url, connect_args=connect_args, future=True)
+_is_sqlite = settings.database_url.startswith("sqlite")
+if _is_sqlite:
+    connect_args = {"check_same_thread": False}
+else:
+    # prepare_threshold=None disables psycopg3 server-side prepared statements,
+    # which a transaction-pooling pgbouncer (Neon's pooled endpoint) rejects.
+    connect_args = {"prepare_threshold": None}
+# On serverless (Vercel) Postgres each invocation may use a fresh connection;
+# pre_ping drops stale ones and a short recycle avoids holding idle conns.
+engine_kwargs = {} if _is_sqlite else {"pool_pre_ping": True, "pool_recycle": 280}
+engine = create_engine(settings.database_url, connect_args=connect_args, future=True, **engine_kwargs)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False, future=True)
 
 
@@ -97,6 +106,16 @@ class RejectionRow(Base):
     state: Mapped[str] = mapped_column(String(32), default="")
     reason: Mapped[str] = mapped_column(Text, default="")
     suggested_validation: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[dt.datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class PdfBlob(Base):
+    """Generated PDF bytes, stored in the DB so the app holds no local state
+    (works on serverless/ephemeral filesystems). Keyed by "<sid>/<name>.pdf"."""
+    __tablename__ = "pdf_blobs"
+
+    key: Mapped[str] = mapped_column(String(160), primary_key=True)
+    data: Mapped[bytes] = mapped_column(LargeBinary)
     created_at: Mapped[dt.datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 

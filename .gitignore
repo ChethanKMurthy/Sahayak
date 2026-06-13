@@ -36,3 +36,9 @@ infra/.terraform.lock.hcl
 .DS_Store
 *.swp
 /tmp/
+
+# stray SQLite from running the API entrypoint at repo root
+/sahayak.db
+.vercel
+
+backend/.env.vercel

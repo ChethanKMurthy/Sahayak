@@ -1,0 +1,13 @@
+# Runtime deps for the Vercel Python serverless API (repo-root entrypoint: api/index.py).
+# Slimmer than backend/requirements.txt on purpose: no uvicorn (Vercel provides the
+# ASGI server) and no boto3 (AWS adapters are unused on Vercel — PDFs go to Postgres).
+fastapi==0.115.5
+pydantic==2.10.3
+pydantic-settings==2.6.1
+python-multipart==0.0.17
+httpx==0.28.1
+SQLAlchemy==2.0.36
+psycopg[binary]==3.2.9
+reportlab==4.2.5
+rapidfuzz==3.10.1
+python-dateutil==2.9.0.post0

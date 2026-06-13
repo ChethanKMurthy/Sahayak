@@ -1,5 +1,7 @@
-// Loads the shared 7-language UI strings (single source of truth in /shared).
-import strings from "../../shared/i18n/strings.json";
+// Loads the shared 7-language UI strings. Source of truth is /shared/i18n/strings.json;
+// this local copy is regenerated from it by scripts/sync-i18n.mjs (pre dev/build) so the
+// web app builds standalone on Vercel without reaching outside its project root.
+import strings from "./strings.shared.json";
 
 export type Lang = "hi" | "en" | "kn" | "ta" | "te" | "mr" | "bn";
 

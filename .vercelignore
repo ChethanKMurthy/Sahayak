@@ -1,0 +1,13 @@
+# Keep the API project's upload small & pure-python.
+# (The function bundle itself is controlled by includeFiles in vercel.json.)
+.git
+backend/.venv
+backend/__pycache__
+backend/**/__pycache__
+backend/sahayak.db
+web
+mobile
+infra
+docs/media
+*.apk
+sahayak.db
