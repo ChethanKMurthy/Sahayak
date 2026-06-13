@@ -1,0 +1,47 @@
+/*
+ * Print stylesheet for the filled application.
+ * Import where a printable form is rendered: `import "@/styles/print.css";`
+ * Hides interactive chrome and lays the form out cleanly for A4 paper.
+ */
+@media print {
+  nav,
+  header,
+  footer,
+  button,
+  [role="button"],
+  .no-print {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt;
+  }
+
+  main,
+  .print-sheet {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    box-shadow: none !important;
+  }
+
+  .print-field {
+    break-inside: avoid;
+    border-bottom: 1px solid #000;
+    padding: 4px 0;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #444;
+  }
+
+  @page {
+    size: A4;
+    margin: 16mm;
+  }
+}
