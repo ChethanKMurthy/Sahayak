@@ -344,3 +344,21 @@ def health_deep() -> dict[str, Any]:
         "ocr": settings.ocr_provider,
         "voice": settings.voice_provider,
     }
+
+
+@router.get("/session/{sid}/audit")
+def session_audit(sid: str, db: DBSession = Depends(get_db)) -> dict[str, Any]:
+    """Return the append-only audit trail for a session (DPDP evidence)."""
+    row = db.get(SessionRow, sid)
+    if row is None:
+        raise HTTPException(404, "Session not found")
+    entries = (
+        db.query(AuditRow).filter(AuditRow.session_id == sid).order_by(AuditRow.at.asc()).all()
+    )
+    return {
+        "session": sid,
+        "count": len(entries),
+        "entries": [
+            {"at": e.at.isoformat(), "action": e.action, "detail": e.detail} for e in entries
+        ],
+    }
