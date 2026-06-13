@@ -300,3 +300,23 @@ async def tts(req: VoiceTTSRequest) -> dict[str, Any]:
 def version() -> dict[str, Any]:
     """Build/version metadata for clients and uptime checks."""
     return {"app": "Sahayak", "version": "0.1.0", "api": "v1"}
+
+
+@router.get("/schemes/search")
+def search_schemes(q: str = "", lang: str = "en") -> dict[str, Any]:
+    """Search the scheme KB by localized name / summary / benefit (case-insensitive)."""
+
+    def _txt(v: Any) -> str:
+        if isinstance(v, dict):
+            return str(v.get(lang) or v.get("en") or next(iter(v.values()), ""))
+        return str(v or "")
+
+    needle = q.strip().lower()
+    results = []
+    for s in load_schemes():
+        hay = " ".join(_txt(x) for x in (s.name, s.summary, s.benefit)).lower()
+        if not needle or needle in hay:
+            results.append(
+                {"id": s.id, "name": _txt(s.name), "category": s.category, "summary": _txt(s.summary)}
+            )
+    return {"query": q, "count": len(results), "results": results}
