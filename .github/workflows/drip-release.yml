@@ -1,0 +1,38 @@
+name: Drip release
+
+# Releases ONE pre-built improvement from the `improvements-queue` branch onto
+# `master` every 2 days at 07:00 IST (01:30 UTC). Everything is built up-front;
+# this workflow just fast-forwards master by a single commit each run.
+on:
+  schedule:
+    - cron: "30 1 */2 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: drip-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+      - name: Advance master by one queued improvement
+        run: |
+          set -euo pipefail
+          git config user.name "sahayak-drip-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git fetch origin improvements-queue:improvements-queue
+          NEXT=$(git rev-list --reverse master..improvements-queue | head -n1)
+          if [ -z "$NEXT" ]; then
+            echo "Queue drained — nothing left to release."
+            exit 0
+          fi
+          echo "Releasing: $(git log -1 --oneline "$NEXT")"
+          git push origin "${NEXT}:master"
