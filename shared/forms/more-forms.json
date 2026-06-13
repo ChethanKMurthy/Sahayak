@@ -1,0 +1,89 @@
+[
+  {
+    "id": "pan-49a",
+    "version": "2024.1",
+    "scheme_id": "pan-49a",
+    "title": {"en": "Form 49A — PAN Application", "hi": "फ़ॉर्म 49A — पैन आवेदन"},
+    "jurisdiction": {"country": "IN", "state": "*"},
+    "fields": [
+      {"key": "applicant_name", "type": "name", "required": true, "label": {"en": "Full name", "hi": "पूरा नाम"}, "source_hints": ["aadhaar.name"], "validations": ["nonEmpty"]},
+      {"key": "father_name", "type": "name", "required": true, "label": {"en": "Father's name", "hi": "पिता का नाम"}, "source_hints": ["aadhaar.father_name"]},
+      {"key": "dob", "type": "date", "required": true, "label": {"en": "Date of birth", "hi": "जन्मतिथि"}, "source_hints": ["aadhaar.dob"], "validations": ["pastDate"]},
+      {"key": "gender", "type": "enum", "required": true, "label": {"en": "Gender", "hi": "लिंग"}, "options": ["male", "female", "other"], "source_hints": ["aadhaar.gender"]},
+      {"key": "address", "type": "address", "required": true, "label": {"en": "Address", "hi": "पता"}, "source_hints": ["aadhaar.address"], "validations": ["nonEmpty"]},
+      {"key": "ao_code", "type": "text", "required": false, "label": {"en": "AO code (jurisdiction — auto-looked-up)", "hi": "AO कोड (क्षेत्राधिकार — स्वतः खोजा गया)"}, "validations": []}
+    ],
+    "attachments": [
+      {"doc": "aadhaar", "copies": 1, "note": {"en": "Aadhaar as identity + address proof", "hi": "पहचान + पते के प्रमाण के रूप में आधार"}},
+      {"doc": "passport_photo", "copies": 2, "note": {"en": "Two passport-size photos", "hi": "दो पासपोर्ट आकार की फोटो"}}
+    ],
+    "submit_to": {"office": {"en": "NSDL/UTIITSL PAN centre or online", "hi": "NSDL/UTIITSL पैन केंद्र या ऑनलाइन"}, "online_wall": false, "fee": 107, "tout_price": 400}
+  },
+  {
+    "id": "pm-kisan",
+    "version": "2024.1",
+    "scheme_id": "pm-kisan",
+    "title": {"en": "PM-KISAN Enrolment", "hi": "पीएम-किसान नामांकन"},
+    "jurisdiction": {"country": "IN", "state": "*"},
+    "fields": [
+      {"key": "applicant_name", "type": "name", "required": true, "label": {"en": "Farmer's full name", "hi": "किसान का पूरा नाम"}, "source_hints": ["aadhaar.name"], "validations": ["nonEmpty"]},
+      {"key": "dob", "type": "date", "required": true, "label": {"en": "Date of birth", "hi": "जन्मतिथि"}, "source_hints": ["aadhaar.dob"]},
+      {"key": "gender", "type": "enum", "required": true, "label": {"en": "Gender", "hi": "लिंग"}, "options": ["male", "female", "other"], "source_hints": ["aadhaar.gender"]},
+      {"key": "address", "type": "address", "required": true, "label": {"en": "Address", "hi": "पता"}, "source_hints": ["aadhaar.address"]},
+      {"key": "owns_cultivable_land", "type": "boolean", "required": true, "label": {"en": "Owns cultivable land?", "hi": "खेती योग्य ज़मीन है?"}, "source_hints": ["land_record.owns_cultivable_land"]},
+      {"key": "land_area", "type": "text", "required": false, "label": {"en": "Land area (from 7/12 / khasra)", "hi": "भूमि क्षेत्र (7/12 / खसरा से)"}, "source_hints": ["land_record.land_area"]},
+      {"key": "is_income_tax_payer", "type": "boolean", "required": true, "label": {"en": "Income-tax payer?", "hi": "आयकर दाता?"}},
+      {"key": "is_govt_employee", "type": "boolean", "required": true, "label": {"en": "Government employee?", "hi": "सरकारी कर्मचारी?"}},
+      {"key": "bank_account", "type": "text", "required": true, "label": {"en": "Bank account number", "hi": "बैंक खाता संख्या"}, "source_hints": ["bank_passbook.bank_account"]},
+      {"key": "ifsc", "type": "ifsc", "required": true, "label": {"en": "Bank IFSC", "hi": "बैंक IFSC"}, "source_hints": ["bank_passbook.ifsc"], "validations": ["ifsc"]}
+    ],
+    "attachments": [
+      {"doc": "aadhaar", "copies": 1, "note": {"en": "Photocopy of Aadhaar", "hi": "आधार की फोटोकॉपी"}},
+      {"doc": "land_record", "copies": 1, "original": true, "note": {"en": "Land record (7/12 / khasra-khatauni)", "hi": "भूमि रिकॉर्ड (7/12 / खसरा-खतौनी)"}},
+      {"doc": "bank_passbook", "copies": 1, "note": {"en": "Bank passbook first page", "hi": "बैंक पासबुक का पहला पन्ना"}}
+    ],
+    "submit_to": {"office": {"en": "Village Revenue Officer / CSC / PM-KISAN portal", "hi": "ग्राम राजस्व अधिकारी / CSC / पीएम-किसान पोर्टल"}, "online_wall": false, "fee": 0, "tout_price": 300}
+  },
+  {
+    "id": "nfsa-ration-card",
+    "version": "2024.1",
+    "scheme_id": "nfsa-ration-card",
+    "title": {"en": "NFSA Ration Card Application", "hi": "एनएफएसए राशन कार्ड आवेदन"},
+    "jurisdiction": {"country": "IN", "state": "*"},
+    "fields": [
+      {"key": "applicant_name", "type": "name", "required": true, "label": {"en": "Head of household name", "hi": "परिवार के मुखिया का नाम"}, "source_hints": ["aadhaar.name"], "validations": ["nonEmpty"]},
+      {"key": "address", "type": "address", "required": true, "label": {"en": "Household address", "hi": "घर का पता"}, "source_hints": ["aadhaar.address"]},
+      {"key": "household_income", "type": "currency", "required": true, "label": {"en": "Total household annual income (₹)", "hi": "कुल पारिवारिक वार्षिक आय (₹)"}, "self_declared": true},
+      {"key": "household_size", "type": "integer", "required": true, "label": {"en": "Number of household members", "hi": "परिवार के सदस्यों की संख्या"}},
+      {"key": "is_govt_employee", "type": "boolean", "required": true, "label": {"en": "Any government-employee member?", "hi": "कोई सरकारी कर्मचारी सदस्य?"}}
+    ],
+    "attachments": [
+      {"doc": "aadhaar", "copies": 1, "note": {"en": "Aadhaar of each household member", "hi": "प्रत्येक सदस्य का आधार"}},
+      {"doc": "passport_photo", "copies": 1, "note": {"en": "Family photo / head photo", "hi": "परिवार/मुखिया की फोटो"}}
+    ],
+    "submit_to": {"office": {"en": "Taluk / Tehsil Food & Civil Supplies office", "hi": "तालुक / तहसील खाद्य एवं आपूर्ति कार्यालय"}, "online_wall": false, "fee": 0, "tout_price": 600}
+  },
+  {
+    "id": "pmuy-ujjwala",
+    "version": "2024.1",
+    "scheme_id": "pmuy-ujjwala",
+    "title": {"en": "PM Ujjwala LPG Application (KYC)", "hi": "पीएम उज्ज्वला एलपीजी आवेदन (KYC)"},
+    "jurisdiction": {"country": "IN", "state": "*"},
+    "fields": [
+      {"key": "applicant_name", "type": "name", "required": true, "label": {"en": "Woman applicant's name", "hi": "महिला आवेदक का नाम"}, "source_hints": ["aadhaar.name"], "validations": ["nonEmpty"]},
+      {"key": "gender", "type": "enum", "required": true, "label": {"en": "Gender", "hi": "लिंग"}, "options": ["male", "female", "other"], "source_hints": ["aadhaar.gender"]},
+      {"key": "address", "type": "address", "required": true, "label": {"en": "Address", "hi": "पता"}, "source_hints": ["aadhaar.address", "ration_card.address"]},
+      {"key": "bpl", "type": "boolean", "required": true, "label": {"en": "BPL household?", "hi": "बीपीएल परिवार?"}, "source_hints": ["ration_card.bpl"]},
+      {"key": "no_existing_lpg", "type": "boolean", "required": true, "label": {"en": "No existing LPG connection (self-declared)?", "hi": "कोई मौजूदा एलपीजी कनेक्शन नहीं (स्व-घोषित)?"}, "self_declared": true},
+      {"key": "bank_account", "type": "text", "required": true, "label": {"en": "Bank account number", "hi": "बैंक खाता संख्या"}, "source_hints": ["bank_passbook.bank_account"]},
+      {"key": "ifsc", "type": "ifsc", "required": true, "label": {"en": "Bank IFSC", "hi": "बैंक IFSC"}, "source_hints": ["bank_passbook.ifsc"], "validations": ["ifsc"]}
+    ],
+    "attachments": [
+      {"doc": "aadhaar", "copies": 1, "note": {"en": "Photocopy of Aadhaar", "hi": "आधार की फोटोकॉपी"}},
+      {"doc": "ration_card", "copies": 1, "note": {"en": "BPL ration card", "hi": "बीपीएल राशन कार्ड"}},
+      {"doc": "bank_passbook", "copies": 1, "note": {"en": "Bank passbook first page", "hi": "बैंक पासबुक का पहला पन्ना"}},
+      {"doc": "passport_photo", "copies": 1, "note": {"en": "One passport-size photo", "hi": "एक पासपोर्ट आकार की फोटो"}}
+    ],
+    "submit_to": {"office": {"en": "Nearest LPG distributor (Indane/Bharat/HP)", "hi": "नज़दीकी एलपीजी वितरक (इंडेन/भारत/एचपी)"}, "online_wall": false, "fee": 0, "tout_price": 500}
+  }
+]

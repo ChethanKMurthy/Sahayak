@@ -1,0 +1,31 @@
+[
+  {
+    "id": "voter-id-form6",
+    "name": {"en": "Voter ID (New Registration)", "hi": "मतदाता पहचान पत्र (नया पंजीकरण)", "kn": "ಮತದಾರರ ಗುರುತಿನ ಚೀಟಿ (ಹೊಸ ನೋಂದಣಿ)"},
+    "category": "identity",
+    "summary": {"en": "Register as a voter using Form 6.", "hi": "फ़ॉर्म 6 के ज़रिए मतदाता के रूप में पंजीकरण करें।"},
+    "criteria": [
+      {"field": "age", "op": ">=", "value": 18, "description": {"en": "Must be 18 or older", "hi": "18 वर्ष या अधिक आयु होनी चाहिए"}},
+      {"field": "citizenship", "op": "==", "value": "indian", "description": {"en": "Must be an Indian citizen", "hi": "भारतीय नागरिक होना चाहिए"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar"],
+    "prerequisite_schemes": [],
+    "form_template_id": "voter-id-form6",
+    "benefit": {"en": "Right to vote and a government photo identity.", "hi": "मतदान का अधिकार और सरकारी फोटो पहचान।"}
+  },
+  {
+    "id": "pan-49a",
+    "name": {"en": "PAN Card (Form 49A)", "hi": "पैन कार्ड (फ़ॉर्म 49A)", "kn": "ಪ್ಯಾನ್ ಕಾರ್ಡ್ (ಫಾರ್ಮ್ 49A)"},
+    "category": "identity",
+    "summary": {"en": "Apply for a Permanent Account Number.", "hi": "स्थायी खाता संख्या के लिए आवेदन करें।"},
+    "criteria": [
+      {"field": "dob", "op": "exists", "value": null, "description": {"en": "Date of birth required", "hi": "जन्मतिथि आवश्यक"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar"],
+    "prerequisite_schemes": [],
+    "form_template_id": "pan-49a",
+    "benefit": {"en": "Tax identity needed for banking, jobs, and high-value transactions.", "hi": "बैंकिंग, नौकरी और बड़े लेन-देन के लिए आवश्यक कर पहचान।"}
+  }
+]

@@ -1,0 +1,52 @@
+name: Deploy to AWS
+
+# Builds & pushes the API + Web images to ECR, then triggers App Runner to deploy.
+# Requires the infra to exist (see infra/README.md) and these repo secrets:
+#   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+env:
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions: { contents: read }
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build & push images
+        env:
+          REG: ${{ steps.ecr.outputs.registry }}
+          TAG: ${{ github.sha }}
+        run: |
+          docker build -f backend/Dockerfile -t $REG/sahayak-api:$TAG -t $REG/sahayak-api:latest .
+          docker build -f web/Dockerfile     -t $REG/sahayak-web:$TAG -t $REG/sahayak-web:latest .
+          docker push $REG/sahayak-api:$TAG && docker push $REG/sahayak-api:latest
+          docker push $REG/sahayak-web:$TAG && docker push $REG/sahayak-web:latest
+
+      - name: Trigger App Runner deployments
+        run: |
+          for svc in sahayak-api sahayak-web; do
+            ARN=$(aws apprunner list-services --query "ServiceSummaryList[?ServiceName=='$svc'].ServiceArn" --output text)
+            if [ -n "$ARN" ]; then
+              echo "Deploying $svc ($ARN)"
+              aws apprunner start-deployment --service-arn "$ARN"
+            else
+              echo "::warning::App Runner service $svc not found — run terraform apply first."
+            fi
+          done

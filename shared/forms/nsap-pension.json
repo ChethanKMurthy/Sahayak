@@ -1,0 +1,30 @@
+{
+  "id": "nsap-pension",
+  "version": "2024.1",
+  "scheme_id": "nsap-old-age-pension",
+  "title": {"en": "NSAP Pension Application", "hi": "एनएसएपी पेंशन आवेदन", "kn": "ಎನ್‌ಎಸ್‌ಎಪಿ ಪಿಂಚಣಿ ಅರ್ಜಿ"},
+  "jurisdiction": {"country": "IN", "state": "*"},
+  "fields": [
+    {"key": "applicant_name", "type": "name", "required": true, "label": {"en": "Full name", "hi": "पूरा नाम"}, "source_hints": ["aadhaar.name"], "validations": ["nonEmpty"]},
+    {"key": "dob", "type": "date", "required": true, "label": {"en": "Date of birth", "hi": "जन्मतिथि"}, "source_hints": ["aadhaar.dob"], "validations": ["pastDate"]},
+    {"key": "gender", "type": "enum", "required": true, "label": {"en": "Gender", "hi": "लिंग"}, "options": ["male", "female", "other"], "source_hints": ["aadhaar.gender"]},
+    {"key": "marital_status", "type": "enum", "required": false, "label": {"en": "Marital status", "hi": "वैवाहिक स्थिति"}, "options": ["married", "widow", "single", "divorced"]},
+    {"key": "address", "type": "address", "required": true, "label": {"en": "Residence address", "hi": "निवास का पता"}, "source_hints": ["aadhaar.address", "ration_card.address"], "validations": ["nonEmpty"]},
+    {"key": "bpl", "type": "boolean", "required": true, "label": {"en": "Below Poverty Line household?", "hi": "गरीबी रेखा से नीचे का परिवार?"}, "source_hints": ["ration_card.bpl"]},
+    {"key": "disability_percent", "type": "number", "required": false, "label": {"en": "Disability percentage (if any)", "hi": "दिव्यांगता प्रतिशत (यदि हो)"}, "source_hints": ["disability_cert.disability_percent"]},
+    {"key": "bank_account", "type": "text", "required": true, "label": {"en": "Bank account number", "hi": "बैंक खाता संख्या"}, "source_hints": ["bank_passbook.bank_account"], "validations": ["nonEmpty"]},
+    {"key": "ifsc", "type": "ifsc", "required": true, "label": {"en": "Bank IFSC", "hi": "बैंक IFSC"}, "source_hints": ["bank_passbook.ifsc"], "validations": ["ifsc"]},
+    {"key": "aadhaar_last4", "type": "aadhaar_last4", "required": false, "label": {"en": "Aadhaar (last 4)", "hi": "आधार (अंतिम 4)"}, "source_hints": ["aadhaar.aadhaar_last4"]}
+  ],
+  "attachments": [
+    {"doc": "aadhaar", "copies": 1, "note": {"en": "Photocopy of Aadhaar", "hi": "आधार की फोटोकॉपी"}},
+    {"doc": "ration_card", "copies": 1, "note": {"en": "BPL ration card copy", "hi": "बीपीएल राशन कार्ड की कॉपी"}},
+    {"doc": "bank_passbook", "copies": 1, "note": {"en": "Bank passbook first page", "hi": "बैंक पासबुक का पहला पन्ना"}},
+    {"doc": "death_cert", "copies": 1, "note": {"en": "Husband's death certificate (widow pension only)", "hi": "पति का मृत्यु प्रमाण पत्र (केवल विधवा पेंशन)"}},
+    {"doc": "disability_cert", "copies": 1, "note": {"en": "UDID certificate (disability pension only)", "hi": "UDID प्रमाण पत्र (केवल दिव्यांग पेंशन)"}}
+  ],
+  "submit_to": {
+    "office": {"en": "Block Development Office / Social Welfare Office", "hi": "खंड विकास कार्यालय / समाज कल्याण कार्यालय"},
+    "online_wall": false, "fee": 0, "tout_price": 500
+  }
+}

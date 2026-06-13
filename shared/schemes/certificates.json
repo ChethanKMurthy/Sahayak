@@ -1,0 +1,58 @@
+[
+  {
+    "id": "income-certificate",
+    "name": {"en": "Income Certificate", "hi": "आय प्रमाण पत्र", "kn": "ಆದಾಯ ಪ್ರಮಾಣಪತ್ರ"},
+    "category": "certificate",
+    "summary": {"en": "Official proof of family income — a prerequisite for many schemes.", "hi": "पारिवारिक आय का आधिकारिक प्रमाण — कई योजनाओं के लिए आवश्यक।"},
+    "criteria": [
+      {"field": "aadhaar_last4", "op": "exists", "value": null, "description": {"en": "Identity proof required", "hi": "पहचान प्रमाण आवश्यक"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar"],
+    "prerequisite_schemes": [],
+    "form_template_id": "income-certificate",
+    "benefit": {"en": "Unlocks scholarships, pensions and reservations.", "hi": "छात्रवृत्ति, पेंशन और आरक्षण के द्वार खोलता है।"}
+  },
+  {
+    "id": "caste-certificate",
+    "name": {"en": "Caste Certificate", "hi": "जाति प्रमाण पत्र", "kn": "ಜಾತಿ ಪ್ರಮಾಣಪತ್ರ"},
+    "category": "certificate",
+    "summary": {"en": "Official proof of caste category (SC/ST/OBC) — a prerequisite for many schemes.", "hi": "जाति श्रेणी (SC/ST/OBC) का आधिकारिक प्रमाण — कई योजनाओं के लिए आवश्यक।"},
+    "criteria": [
+      {"field": "aadhaar_last4", "op": "exists", "value": null, "description": {"en": "Identity proof required", "hi": "पहचान प्रमाण आवश्यक"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar"],
+    "prerequisite_schemes": [],
+    "form_template_id": "caste-certificate",
+    "benefit": {"en": "Required for reserved-category scholarships and jobs.", "hi": "आरक्षित श्रेणी की छात्रवृत्ति और नौकरियों के लिए आवश्यक।"}
+  },
+  {
+    "id": "domicile-certificate",
+    "name": {"en": "Domicile Certificate", "hi": "निवास प्रमाण पत्र", "kn": "ವಾಸಸ್ಥಳ ಪ್ರಮಾಣಪತ್ರ"},
+    "category": "certificate",
+    "summary": {"en": "Official proof of residence in a state.", "hi": "किसी राज्य में निवास का आधिकारिक प्रमाण।"},
+    "criteria": [
+      {"field": "address", "op": "exists", "value": null, "description": {"en": "Address proof required", "hi": "पता प्रमाण आवश्यक"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar"],
+    "prerequisite_schemes": [],
+    "form_template_id": "domicile-certificate",
+    "benefit": {"en": "Required for state quotas in education and jobs.", "hi": "शिक्षा और नौकरियों में राज्य कोटा के लिए आवश्यक।"}
+  },
+  {
+    "id": "disability-certificate-udid",
+    "name": {"en": "Disability Certificate (UDID)", "hi": "दिव्यांगता प्रमाण पत्र (UDID)", "kn": "ಅಂಗವೈಕಲ್ಯ ಪ್ರಮಾಣಪತ್ರ (UDID)"},
+    "category": "certificate",
+    "summary": {"en": "Unique Disability ID certifying degree of disability.", "hi": "दिव्यांगता की मात्रा प्रमाणित करने वाली विशिष्ट दिव्यांगता आईडी।"},
+    "criteria": [
+      {"field": "aadhaar_last4", "op": "exists", "value": null, "description": {"en": "Identity proof required", "hi": "पहचान प्रमाण आवश्यक"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar"],
+    "prerequisite_schemes": [],
+    "form_template_id": "disability-certificate-udid",
+    "benefit": {"en": "Unlocks disability pension, reservations and travel concessions.", "hi": "दिव्यांग पेंशन, आरक्षण और यात्रा छूट के द्वार खोलता है।"}
+  }
+]

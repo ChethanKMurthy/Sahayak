@@ -1,0 +1,38 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+backend/sahayak.db
+backend/generated/
+*.pdf
+
+# Node / Next
+web/node_modules/
+web/.next/
+web/out/
+.env
+.env.local
+*.local
+
+# Flutter
+mobile/.dart_tool/
+mobile/build/
+mobile/.flutter-plugins*
+mobile/android/
+mobile/ios/
+mobile/linux/
+mobile/macos/
+mobile/windows/
+mobile/web/
+!mobile/android/app/src/main/res/
+
+# Terraform
+infra/.terraform/
+infra/*.tfstate*
+infra/terraform.tfvars
+infra/.terraform.lock.hcl
+
+# OS / editors
+.DS_Store
+*.swp
+/tmp/

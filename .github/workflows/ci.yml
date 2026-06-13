@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push: { branches: [main] }
+  pull_request: {}
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Install deps
+        working-directory: backend
+        run: pip install -r requirements.txt
+      - name: End-to-end smoke test (all personas)
+        working-directory: backend
+        run: python smoke_test.py
+
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Install & build
+        working-directory: web
+        run: |
+          npm install --no-audit --no-fund
+          npm run build

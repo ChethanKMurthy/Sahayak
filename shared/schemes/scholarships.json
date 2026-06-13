@@ -1,0 +1,19 @@
+[
+  {
+    "id": "post-matric-scholarship",
+    "name": {"en": "Post-Matric Scholarship (NSP)", "hi": "पोस्ट-मैट्रिक छात्रवृत्ति (NSP)", "kn": "ಮೆಟ್ರಿಕ್ ನಂತರದ ವಿದ್ಯಾರ್ಥಿವೇತನ (NSP)"},
+    "category": "scholarship",
+    "summary": {"en": "Scholarship for SC/ST/OBC students after class 10, within an income ceiling.", "hi": "कक्षा 10 के बाद SC/ST/OBC छात्रों के लिए छात्रवृत्ति, आय सीमा के भीतर।"},
+    "criteria": [
+      {"field": "caste_category", "op": "in", "value": ["sc", "st", "obc"], "description": {"en": "SC, ST or OBC category", "hi": "SC, ST या OBC श्रेणी"}},
+      {"field": "income", "op": "<=", "value": 250000, "description": {"en": "Annual family income at or below ₹2.5 lakh", "hi": "वार्षिक पारिवारिक आय ₹2.5 लाख तक"}},
+      {"field": "course_level", "op": "in", "value": ["post_matric", "class11", "class12", "graduation", "diploma"], "description": {"en": "Studying class 11 or above", "hi": "कक्षा 11 या उससे ऊपर पढ़ रहे हैं"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar", "income_cert", "caste_cert", "marksheet", "bank_passbook"],
+    "prerequisite_schemes": ["income-certificate", "caste-certificate"],
+    "form_template_id": "post-matric-scholarship",
+    "benefit": {"en": "Tuition + maintenance allowance paid into your bank account.", "hi": "ट्यूशन + रखरखाव भत्ता आपके बैंक खाते में।"},
+    "discovery_gate": ["course_level"]
+  }
+]

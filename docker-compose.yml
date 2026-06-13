@@ -1,0 +1,44 @@
+# Local full-stack run: Postgres + FastAPI backend + Next.js web.
+# (Mirrors the AWS topology; the Flutter app runs separately on a device/emulator
+#  pointing at the backend.) Usage:  docker compose up --build
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: sahayak
+      POSTGRES_PASSWORD: sahayak
+      POSTGRES_DB: sahayak
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sahayak"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg://sahayak:sahayak@db:5432/sahayak
+      CORS_ORIGINS: http://localhost:3000
+      # Leave provider keys blank to run fully on mocks.
+      GROK_API_KEY: ${GROK_API_KEY:-}
+      OCR_PROVIDER: ${OCR_PROVIDER:-mock}
+      VOICE_PROVIDER: ${VOICE_PROVIDER:-mock}
+    ports: ["8000:8000"]
+    depends_on:
+      db: { condition: service_healthy }
+
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports: ["3000:3000"]
+    depends_on: ["api"]
+
+volumes:
+  pgdata: {}

@@ -1,0 +1,25 @@
+{
+  "id": "voter-id-form6",
+  "version": "2024.1",
+  "scheme_id": "voter-id-form6",
+  "title": {"en": "Form 6 — Application for Voter Registration", "hi": "फ़ॉर्म 6 — मतदाता पंजीकरण आवेदन", "kn": "ಫಾರ್ಮ್ 6 — ಮತದಾರ ನೋಂದಣಿ ಅರ್ಜಿ"},
+  "jurisdiction": {"country": "IN", "state": "*"},
+  "fields": [
+    {"key": "applicant_name", "type": "name", "required": true, "label": {"en": "Full name", "hi": "पूरा नाम"}, "source_hints": ["aadhaar.name", "marksheet.name"], "validations": ["nonEmpty", "maxLen:99"]},
+    {"key": "father_name", "type": "name", "required": true, "label": {"en": "Father's / Mother's / Husband's name", "hi": "पिता/माता/पति का नाम"}, "source_hints": ["aadhaar.father_name"], "validations": ["nonEmpty"]},
+    {"key": "dob", "type": "date", "required": true, "label": {"en": "Date of birth", "hi": "जन्मतिथि"}, "source_hints": ["aadhaar.dob"], "validations": ["pastDate", "age>=18"]},
+    {"key": "gender", "type": "enum", "required": true, "label": {"en": "Gender", "hi": "लिंग"}, "options": ["male", "female", "other"], "source_hints": ["aadhaar.gender"]},
+    {"key": "address", "type": "address", "required": true, "label": {"en": "Ordinary residence address", "hi": "सामान्य निवास का पता"}, "source_hints": ["aadhaar.address", "ration_card.address"], "validations": ["nonEmpty"]},
+    {"key": "aadhaar_last4", "type": "aadhaar_last4", "required": false, "label": {"en": "Aadhaar (last 4 digits)", "hi": "आधार (अंतिम 4 अंक)"}, "source_hints": ["aadhaar.aadhaar_last4"]},
+    {"key": "citizenship", "type": "enum", "required": true, "label": {"en": "Citizen of India?", "hi": "भारत के नागरिक?"}, "options": ["indian", "other"]},
+    {"key": "mobile", "type": "phone", "required": false, "label": {"en": "Mobile number", "hi": "मोबाइल नंबर"}, "validations": ["phone"]}
+  ],
+  "attachments": [
+    {"doc": "aadhaar", "copies": 1, "note": {"en": "Photocopy of Aadhaar", "hi": "आधार की फोटोकॉपी"}},
+    {"doc": "passport_photo", "copies": 1, "note": {"en": "One passport-size photo", "hi": "एक पासपोर्ट आकार की फोटो"}}
+  ],
+  "submit_to": {
+    "office": {"en": "Electoral Registration Officer (ERO) of your constituency", "hi": "आपके निर्वाचन क्षेत्र के निर्वाचन पंजीकरण अधिकारी (ERO)"},
+    "online_wall": false, "fee": 0, "tout_price": 200
+  }
+}

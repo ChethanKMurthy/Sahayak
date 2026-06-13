@@ -1,0 +1,49 @@
+[
+  {
+    "id": "pm-kisan",
+    "name": {"en": "PM-KISAN", "hi": "पीएम-किसान", "kn": "ಪಿಎಂ-ಕಿಸಾನ್"},
+    "category": "agriculture",
+    "summary": {"en": "₹6000/year income support for cultivable landholding farmers.", "hi": "खेती योग्य ज़मीन वाले किसानों के लिए ₹6000/वर्ष आय सहायता।"},
+    "criteria": [
+      {"field": "owns_cultivable_land", "op": "is_true", "value": true, "description": {"en": "Owns cultivable land", "hi": "खेती योग्य ज़मीन है"}},
+      {"field": "is_income_tax_payer", "op": "==", "value": false, "description": {"en": "Not an income-tax payer", "hi": "आयकर दाता नहीं"}},
+      {"field": "is_govt_employee", "op": "==", "value": false, "description": {"en": "Not a government employee", "hi": "सरकारी कर्मचारी नहीं"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar", "land_record", "bank_passbook"],
+    "prerequisite_schemes": [],
+    "form_template_id": "pm-kisan",
+    "benefit": {"en": "₹6000 a year in three instalments to your bank account.", "hi": "हर साल ₹6000 तीन किस्तों में आपके बैंक खाते में।"}
+  },
+  {
+    "id": "nfsa-ration-card",
+    "name": {"en": "NFSA Ration Card", "hi": "एनएफएसए राशन कार्ड", "kn": "ಎನ್‌ಎಫ್‌ಎಸ್‌ಎ ಪಡಿತರ ಚೀಟಿ"},
+    "category": "food_security",
+    "summary": {"en": "Subsidised foodgrain for eligible households under the food security act.", "hi": "खाद्य सुरक्षा अधिनियम के तहत पात्र परिवारों के लिए रियायती अनाज।"},
+    "criteria": [
+      {"field": "household_income", "op": "<=", "value": 120000, "description": {"en": "Household income within the state ceiling", "hi": "परिवार की आय राज्य सीमा के भीतर"}},
+      {"field": "is_govt_employee", "op": "==", "value": false, "description": {"en": "No government-employee member (exclusion)", "hi": "कोई सरकारी कर्मचारी सदस्य नहीं (बहिष्करण)"}}
+    ],
+    "household_scheme": true,
+    "requires_documents": ["aadhaar"],
+    "prerequisite_schemes": [],
+    "form_template_id": "nfsa-ration-card",
+    "benefit": {"en": "Subsidised rice/wheat for the whole household every month.", "hi": "पूरे परिवार के लिए हर महीने रियायती चावल/गेहूँ।"}
+  },
+  {
+    "id": "pmuy-ujjwala",
+    "name": {"en": "PM Ujjwala (LPG Connection)", "hi": "पीएम उज्ज्वला (एलपीजी कनेक्शन)", "kn": "ಪಿಎಂ ಉಜ್ವಲಾ (ಎಲ್‌ಪಿಜಿ ಸಂಪರ್ಕ)"},
+    "category": "energy",
+    "summary": {"en": "Free LPG connection for women from BPL households.", "hi": "बीपीएल परिवारों की महिलाओं के लिए मुफ़्त एलपीजी कनेक्शन।"},
+    "criteria": [
+      {"field": "gender", "op": "==", "value": "female", "description": {"en": "Applicant is a woman", "hi": "आवेदक महिला है"}},
+      {"field": "bpl", "op": "is_true", "value": true, "description": {"en": "Below Poverty Line household", "hi": "गरीबी रेखा से नीचे का परिवार"}},
+      {"field": "no_existing_lpg", "op": "is_true", "value": true, "description": {"en": "No existing LPG connection (self-declared)", "hi": "कोई मौजूदा एलपीजी कनेक्शन नहीं (स्व-घोषित)"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar", "bank_passbook"],
+    "prerequisite_schemes": [],
+    "form_template_id": "pmuy-ujjwala",
+    "benefit": {"en": "Free cooking-gas connection and first refill support.", "hi": "मुफ़्त रसोई गैस कनेक्शन और पहली रिफिल सहायता।"}
+  }
+]

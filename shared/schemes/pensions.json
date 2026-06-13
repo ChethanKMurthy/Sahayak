@@ -1,0 +1,50 @@
+[
+  {
+    "id": "nsap-old-age-pension",
+    "name": {"en": "Old Age Pension (IGNOAPS)", "hi": "वृद्धावस्था पेंशन (IGNOAPS)", "kn": "ವೃದ್ಧಾಪ್ಯ ಪಿಂಚಣಿ (IGNOAPS)"},
+    "category": "pension",
+    "summary": {"en": "Monthly pension for elderly citizens below the poverty line.", "hi": "गरीबी रेखा से नीचे के बुज़ुर्गों के लिए मासिक पेंशन।"},
+    "criteria": [
+      {"field": "age", "op": ">=", "value": 60, "description": {"en": "Age 60 or above", "hi": "आयु 60 वर्ष या अधिक"}},
+      {"field": "bpl", "op": "is_true", "value": true, "description": {"en": "Below Poverty Line household", "hi": "गरीबी रेखा से नीचे का परिवार"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar"],
+    "prerequisite_schemes": [],
+    "form_template_id": "nsap-pension",
+    "benefit": {"en": "Monthly pension credited to your bank account.", "hi": "हर महीने आपके बैंक खाते में पेंशन।"}
+  },
+  {
+    "id": "nsap-widow-pension",
+    "name": {"en": "Widow Pension (IGNWPS)", "hi": "विधवा पेंशन (IGNWPS)", "kn": "ವಿಧವಾ ಪಿಂಚಣಿ (IGNWPS)"},
+    "category": "pension",
+    "summary": {"en": "Monthly pension for widows below the poverty line.", "hi": "गरीबी रेखा से नीचे की विधवाओं के लिए मासिक पेंशन।"},
+    "criteria": [
+      {"field": "gender", "op": "==", "value": "female", "description": {"en": "Applicant is a woman", "hi": "आवेदक महिला है"}},
+      {"field": "marital_status", "op": "==", "value": "widow", "description": {"en": "Marital status: widow", "hi": "वैवाहिक स्थिति: विधवा"}},
+      {"field": "age", "op": ">=", "value": 40, "description": {"en": "Age 40 to 79", "hi": "आयु 40 से 79 वर्ष"}},
+      {"field": "bpl", "op": "is_true", "value": true, "description": {"en": "Below Poverty Line household", "hi": "गरीबी रेखा से नीचे का परिवार"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar", "death_cert"],
+    "prerequisite_schemes": [],
+    "form_template_id": "nsap-pension",
+    "benefit": {"en": "Monthly widow pension to your bank account.", "hi": "हर महीने आपके बैंक खाते में विधवा पेंशन।"}
+  },
+  {
+    "id": "nsap-disability-pension",
+    "name": {"en": "Disability Pension (IGNDPS)", "hi": "दिव्यांग पेंशन (IGNDPS)", "kn": "ಅಂಗವಿಕಲ ಪಿಂಚಣಿ (IGNDPS)"},
+    "category": "pension",
+    "summary": {"en": "Monthly pension for persons with severe disability, below the poverty line.", "hi": "गरीबी रेखा से नीचे गंभीर दिव्यांग व्यक्तियों के लिए मासिक पेंशन।"},
+    "criteria": [
+      {"field": "disability_percent", "op": ">=", "value": 40, "description": {"en": "Disability of 40% or more", "hi": "40% या अधिक दिव्यांगता"}},
+      {"field": "bpl", "op": "is_true", "value": true, "description": {"en": "Below Poverty Line household", "hi": "गरीबी रेखा से नीचे का परिवार"}}
+    ],
+    "household_scheme": false,
+    "requires_documents": ["aadhaar", "disability_cert"],
+    "prerequisite_schemes": ["disability-certificate-udid"],
+    "form_template_id": "nsap-pension",
+    "benefit": {"en": "Monthly disability pension to your bank account.", "hi": "हर महीने आपके बैंक खाते में दिव्यांग पेंशन।"},
+    "discovery_gate": ["disability_percent"]
+  }
+]

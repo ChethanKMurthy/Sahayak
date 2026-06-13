@@ -1,0 +1,10 @@
+# Copy to terraform.tfvars (gitignored) and fill in. Never commit real secrets.
+aws_region = "ap-south-1"
+
+# RDS master password (>= 8 chars). Or export TF_VAR_db_password instead.
+db_password = "change-me-strong-password"
+
+# External API keys (optional at first — the app runs with mocks if blank).
+grok_api_key     = ""
+bhashini_api_key = ""
+bhashini_user_id = ""

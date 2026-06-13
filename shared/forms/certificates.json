@@ -1,0 +1,74 @@
+[
+  {
+    "id": "income-certificate",
+    "version": "2024.1",
+    "scheme_id": "income-certificate",
+    "title": {"en": "Income Certificate Application", "hi": "आय प्रमाण पत्र आवेदन"},
+    "jurisdiction": {"country": "IN", "state": "*"},
+    "fields": [
+      {"key": "applicant_name", "type": "name", "required": true, "label": {"en": "Full name", "hi": "पूरा नाम"}, "source_hints": ["aadhaar.name"], "validations": ["nonEmpty"]},
+      {"key": "father_name", "type": "name", "required": true, "label": {"en": "Father's name", "hi": "पिता का नाम"}, "source_hints": ["aadhaar.father_name"]},
+      {"key": "address", "type": "address", "required": true, "label": {"en": "Address", "hi": "पता"}, "source_hints": ["aadhaar.address"]},
+      {"key": "income", "type": "currency", "required": true, "label": {"en": "Annual family income (₹)", "hi": "वार्षिक पारिवारिक आय (₹)"}, "self_declared": true},
+      {"key": "purpose", "type": "text", "required": false, "label": {"en": "Purpose", "hi": "उद्देश्य"}}
+    ],
+    "attachments": [
+      {"doc": "aadhaar", "copies": 1, "note": {"en": "Photocopy of Aadhaar", "hi": "आधार की फोटोकॉपी"}},
+      {"doc": "ration_card", "copies": 1, "note": {"en": "Ration card (as income indicator)", "hi": "राशन कार्ड (आय संकेतक)"}}
+    ],
+    "submit_to": {"office": {"en": "Tehsildar / Revenue office (via e-District / Nadakacheri)", "hi": "तहसीलदार / राजस्व कार्यालय (e-District / नाडकचेरी के माध्यम से)"}, "online_wall": false, "fee": 15, "tout_price": 300}
+  },
+  {
+    "id": "caste-certificate",
+    "version": "2024.1",
+    "scheme_id": "caste-certificate",
+    "title": {"en": "Caste Certificate Application", "hi": "जाति प्रमाण पत्र आवेदन"},
+    "jurisdiction": {"country": "IN", "state": "*"},
+    "fields": [
+      {"key": "applicant_name", "type": "name", "required": true, "label": {"en": "Full name", "hi": "पूरा नाम"}, "source_hints": ["aadhaar.name"], "validations": ["nonEmpty"]},
+      {"key": "father_name", "type": "name", "required": true, "label": {"en": "Father's name", "hi": "पिता का नाम"}, "source_hints": ["aadhaar.father_name"]},
+      {"key": "address", "type": "address", "required": true, "label": {"en": "Address", "hi": "पता"}, "source_hints": ["aadhaar.address"]},
+      {"key": "caste_category", "type": "enum", "required": true, "label": {"en": "Caste category", "hi": "जाति श्रेणी"}, "options": ["sc", "st", "obc", "general"]},
+      {"key": "caste_name", "type": "text", "required": false, "label": {"en": "Caste name", "hi": "जाति का नाम"}}
+    ],
+    "attachments": [
+      {"doc": "aadhaar", "copies": 1, "note": {"en": "Photocopy of Aadhaar", "hi": "आधार की फोटोकॉपी"}}
+    ],
+    "submit_to": {"office": {"en": "Tehsildar / Revenue office (via e-District / Nadakacheri)", "hi": "तहसीलदार / राजस्व कार्यालय"}, "online_wall": false, "fee": 15, "tout_price": 300}
+  },
+  {
+    "id": "domicile-certificate",
+    "version": "2024.1",
+    "scheme_id": "domicile-certificate",
+    "title": {"en": "Domicile Certificate Application", "hi": "निवास प्रमाण पत्र आवेदन"},
+    "jurisdiction": {"country": "IN", "state": "*"},
+    "fields": [
+      {"key": "applicant_name", "type": "name", "required": true, "label": {"en": "Full name", "hi": "पूरा नाम"}, "source_hints": ["aadhaar.name"], "validations": ["nonEmpty"]},
+      {"key": "address", "type": "address", "required": true, "label": {"en": "Residence address", "hi": "निवास का पता"}, "source_hints": ["aadhaar.address", "ration_card.address"]},
+      {"key": "years_of_residence", "type": "number", "required": false, "label": {"en": "Years of residence", "hi": "निवास के वर्ष"}}
+    ],
+    "attachments": [
+      {"doc": "aadhaar", "copies": 1, "note": {"en": "Photocopy of Aadhaar", "hi": "आधार की फोटोकॉपी"}},
+      {"doc": "ration_card", "copies": 1, "note": {"en": "Ration card as residence proof", "hi": "निवास प्रमाण के रूप में राशन कार्ड"}}
+    ],
+    "submit_to": {"office": {"en": "Tehsildar / Revenue office", "hi": "तहसीलदार / राजस्व कार्यालय"}, "online_wall": false, "fee": 15, "tout_price": 250}
+  },
+  {
+    "id": "disability-certificate-udid",
+    "version": "2024.1",
+    "scheme_id": "disability-certificate-udid",
+    "title": {"en": "UDID Disability Certificate Application", "hi": "UDID दिव्यांगता प्रमाण पत्र आवेदन"},
+    "jurisdiction": {"country": "IN", "state": "*"},
+    "fields": [
+      {"key": "applicant_name", "type": "name", "required": true, "label": {"en": "Full name", "hi": "पूरा नाम"}, "source_hints": ["aadhaar.name"], "validations": ["nonEmpty"]},
+      {"key": "dob", "type": "date", "required": true, "label": {"en": "Date of birth", "hi": "जन्मतिथि"}, "source_hints": ["aadhaar.dob"]},
+      {"key": "address", "type": "address", "required": true, "label": {"en": "Address", "hi": "पता"}, "source_hints": ["aadhaar.address"]},
+      {"key": "disability_type", "type": "text", "required": false, "label": {"en": "Type of disability", "hi": "दिव्यांगता का प्रकार"}}
+    ],
+    "attachments": [
+      {"doc": "aadhaar", "copies": 1, "note": {"en": "Photocopy of Aadhaar", "hi": "आधार की फोटोकॉपी"}},
+      {"doc": "passport_photo", "copies": 1, "note": {"en": "One passport-size photo", "hi": "एक पासपोर्ट आकार की फोटो"}}
+    ],
+    "submit_to": {"office": {"en": "Designated government hospital medical board", "hi": "निर्दिष्ट सरकारी अस्पताल चिकित्सा बोर्ड"}, "online_wall": true, "online_wall_note": {"en": "Requires an in-person medical assessment to grade disability — Sahayak prepares the application up to the hospital visit.", "hi": "दिव्यांगता आकलन के लिए व्यक्तिगत चिकित्सा जांच आवश्यक — सहायक अस्पताल यात्रा तक आवेदन तैयार करता है।"}, "fee": 0, "tout_price": 400}
+  }
+]

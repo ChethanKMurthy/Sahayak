@@ -1,0 +1,35 @@
+{
+  "id": "post-matric-scholarship",
+  "version": "2024.1",
+  "scheme_id": "post-matric-scholarship",
+  "title": {"en": "Post-Matric Scholarship Application (NSP)", "hi": "पोस्ट-मैट्रिक छात्रवृत्ति आवेदन (NSP)", "kn": "ಮೆಟ್ರಿಕ್ ನಂತರದ ವಿದ್ಯಾರ್ಥಿವೇತನ ಅರ್ಜಿ (NSP)"},
+  "jurisdiction": {"country": "IN", "state": "*"},
+  "fields": [
+    {"key": "applicant_name", "type": "name", "required": true, "label": {"en": "Student's full name", "hi": "छात्र का पूरा नाम"}, "source_hints": ["aadhaar.name", "marksheet.name"], "validations": ["nonEmpty"]},
+    {"key": "father_name", "type": "name", "required": true, "label": {"en": "Father's name", "hi": "पिता का नाम"}, "source_hints": ["aadhaar.father_name", "marksheet.father_name"]},
+    {"key": "dob", "type": "date", "required": true, "label": {"en": "Date of birth", "hi": "जन्मतिथि"}, "source_hints": ["aadhaar.dob", "marksheet.dob"], "validations": ["pastDate"]},
+    {"key": "gender", "type": "enum", "required": true, "label": {"en": "Gender", "hi": "लिंग"}, "options": ["male", "female", "other"], "source_hints": ["aadhaar.gender"]},
+    {"key": "caste_category", "type": "enum", "required": true, "label": {"en": "Caste category", "hi": "जाति श्रेणी"}, "options": ["sc", "st", "obc", "general"], "source_hints": ["caste_cert.caste_category"]},
+    {"key": "income", "type": "currency", "required": true, "label": {"en": "Annual family income (₹)", "hi": "वार्षिक पारिवारिक आय (₹)"}, "source_hints": ["income_cert.income"], "self_declared": true, "validations": ["number"]},
+    {"key": "course_level", "type": "enum", "required": true, "label": {"en": "Current course / class", "hi": "वर्तमान पाठ्यक्रम / कक्षा"}, "options": ["class11", "class12", "diploma", "graduation", "post_matric"], "source_hints": ["marksheet.course_level"]},
+    {"key": "institution", "type": "text", "required": true, "label": {"en": "Institution name", "hi": "संस्थान का नाम"}, "validations": ["nonEmpty"]},
+    {"key": "marks_percent", "type": "number", "required": false, "label": {"en": "Last exam percentage", "hi": "पिछली परीक्षा का प्रतिशत"}, "source_hints": ["marksheet.marks_percent"]},
+    {"key": "bank_account", "type": "text", "required": true, "label": {"en": "Bank account number", "hi": "बैंक खाता संख्या"}, "source_hints": ["bank_passbook.bank_account"], "validations": ["nonEmpty"]},
+    {"key": "ifsc", "type": "ifsc", "required": true, "label": {"en": "Bank IFSC", "hi": "बैंक IFSC"}, "source_hints": ["bank_passbook.ifsc"], "validations": ["ifsc"]},
+    {"key": "aadhaar_last4", "type": "aadhaar_last4", "required": false, "label": {"en": "Aadhaar (last 4)", "hi": "आधार (अंतिम 4)"}, "source_hints": ["aadhaar.aadhaar_last4"]}
+  ],
+  "attachments": [
+    {"doc": "aadhaar", "copies": 1, "note": {"en": "Photocopy of Aadhaar", "hi": "आधार की फोटोकॉपी"}},
+    {"doc": "income_cert", "copies": 1, "note": {"en": "Income certificate", "hi": "आय प्रमाण पत्र"}},
+    {"doc": "caste_cert", "copies": 1, "note": {"en": "Caste certificate", "hi": "जाति प्रमाण पत्र"}},
+    {"doc": "marksheet", "copies": 1, "note": {"en": "Last qualifying marksheet", "hi": "पिछली योग्यता अंकतालिका"}},
+    {"doc": "bank_passbook", "copies": 1, "note": {"en": "Bank passbook first page", "hi": "बैंक पासबुक का पहला पन्ना"}},
+    {"doc": "passport_photo", "copies": 1, "note": {"en": "One passport-size photo", "hi": "एक पासपोर्ट आकार की फोटो"}}
+  ],
+  "submit_to": {
+    "office": {"en": "Apply online on the National Scholarship Portal (NSP); verified by your institution", "hi": "राष्ट्रीय छात्रवृत्ति पोर्टल (NSP) पर ऑनलाइन आवेदन; आपके संस्थान द्वारा सत्यापित"},
+    "online_wall": true,
+    "online_wall_note": {"en": "Final submission is on the NSP website with institution verification — Sahayak prepares everything up to that step.", "hi": "अंतिम सबमिशन NSP वेबसाइट पर संस्थान सत्यापन के साथ होता है — सहायक उस चरण तक सब कुछ तैयार करता है।"},
+    "fee": 0, "tout_price": 800
+  }
+}
