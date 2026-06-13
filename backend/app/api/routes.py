@@ -294,3 +294,9 @@ async def asr(req: VoiceASRRequest) -> dict[str, Any]:
 async def tts(req: VoiceTTSRequest) -> dict[str, Any]:
     audio = await get_voice().synthesize(req.text, req.language)
     return {"audio_b64": audio}
+
+
+@router.get("/version")
+def version() -> dict[str, Any]:
+    """Build/version metadata for clients and uptime checks."""
+    return {"app": "Sahayak", "version": "0.1.0", "api": "v1"}
