@@ -39,3 +39,9 @@ def root() -> dict[str, str]:
 from .core.request_log import RequestLogMiddleware  # noqa: E402
 
 app.add_middleware(RequestLogMiddleware)
+
+
+# ── In-memory rate limiting (improvement) ───────────────────────────────────
+from .core.ratelimit import RateLimitMiddleware  # noqa: E402
+
+app.add_middleware(RateLimitMiddleware, rate=20.0, burst=40)
