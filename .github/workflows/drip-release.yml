@@ -29,7 +29,10 @@ jobs:
           git config user.name "sahayak-drip-bot"
           git config user.email "actions@users.noreply.github.com"
           git fetch origin improvements-queue:improvements-queue
-          NEXT=$(git rev-list --reverse master..improvements-queue | head -n1)
+          # Read the full list first: piping into `head -n1` under pipefail
+          # kills rev-list with SIGPIPE (exit 141) and fails the job.
+          QUEUE=$(git rev-list --reverse master..improvements-queue)
+          NEXT=${QUEUE%%$'\n'*}
           if [ -z "$NEXT" ]; then
             echo "Queue drained — nothing left to release."
             exit 0
